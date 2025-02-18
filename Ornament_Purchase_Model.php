@@ -67,25 +67,7 @@ class Ornament_Purchase_Model extends CI_Model {
             $invoice_code = 'MJOP/' . $branch_id . $currentDay . $currentMonth . $currentYear . '/' . $newNumber;
             return $invoice_code;  
         }
-        public function get_tbl_ornament_purchase($ornament_purchase_id)
-        {
 
-            $this->db->select('tbl_ornament_purchase.*,tbl_customer.cust_id,
-            tbl_customer.cust_name,tbl_customer.debitors_id,tbl_customer.creditors_id,
-            tbl_customer.customer_staus,tbl_customer.macom_cust_id,tbl_customer.vendor_purchase_mu,
-            tbl_customer_details.*,to_state.*,tbl_branch.macom_branch_id,
-            from_state.macom_state_id as from_macom_state_id')
-            ->from('tbl_ornament_purchase');
-            $this->db->join('tbl_customer', 'tbl_customer.cust_id  = tbl_ornament_purchase.vendor_id', 'left');
-            $this->db->join('tbl_customer_details', 'tbl_customer_details.customer_id  = tbl_customer.cust_id', 'left');
-            $this->db->join('tbl_branch', 'tbl_branch.branch_id=tbl_ornament_purchase.branch_id', 'left');
-            $this->db->join('tbl_states as to_state', 'tbl_branch.state_id = to_state.id', 'left');
-            $this->db->join('tbl_states as from_state', 'tbl_customer_details.cust_state = from_state.id', 'left');
-            $this->db->where('tbl_ornament_purchase.ornament_purchase_id',$ornament_purchase_id);
-            $query=$this->db->get();// print_r($this->db);
-            return $query->result_array();
-         
-        }
         public function ornament_purchase_list($ornament_purchase_id,$branch_id)
         {
             $this->db->select('*')
