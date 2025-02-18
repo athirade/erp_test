@@ -77,13 +77,7 @@ class Ornament_Purchase_Model extends CI_Model {
             $query=$this->db->get();
             return $query->result_array();
         }
-        
-        public function ornament_purchase_details_insert($data)
-        { 
-            $this->db->insert('tbl_ornament_purchase_details',$data);  
-            $insert_id = $this->db->insert_id();
-            return  $insert_id;
-        }
+ 
         
         public function tbl_style_where_department($department_type)
         {
@@ -94,20 +88,7 @@ class Ornament_Purchase_Model extends CI_Model {
             return $query->result_array();
         }
         
-        public function get_ornament_stock($branch_id)
-        {
-            $this->db->select('*')
-            ->from('tbl_ornament_purchase');
-            $this->db->join('tbl_customer_details', 'tbl_customer_details.customer_id = tbl_ornament_purchase.vendor_id', 'left');
-            $this->db->join('tbl_customer', 'tbl_customer.cust_id = tbl_customer_details.customer_id', 'left');
-            // $this->db->join('tbl_vendor', 'tbl_vendor.vendor_id  = tbl_ornament_purchase.vendor_id', 'left');
-            $this->db->join('tbl_branch', 'tbl_branch.branch_id  = tbl_ornament_purchase.branch_id', 'left');
-            $this->db->where('tbl_ornament_purchase.status',0);
-            $this->db->where('tbl_ornament_purchase.branch_id',$branch_id);
-            $this->db->order_by('tbl_ornament_purchase.ornament_purchase_id', 'DESC');
-            $query=$this->db->get(); //print_r($this->db);exit;
-            return $query->result_array();
-        }
+
 
         public function calculate_purchase_weight($ornament_purchase_id)
         {
